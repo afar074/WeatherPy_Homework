@@ -1,0 +1,1736 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{WeatherPy}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Dependencies and Setup}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{requests}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        
+        \PY{c+c1}{\PYZsh{} Import API key}
+        \PY{k+kn}{import} \PY{n+nn}{api\PYZus{}keys}
+        
+        \PY{c+c1}{\PYZsh{} Incorporated citipy to determine city based on latitude and longitude}
+        \PY{k+kn}{from} \PY{n+nn}{citipy} \PY{k}{import} \PY{n}{citipy}
+        
+        \PY{c+c1}{\PYZsh{} Output File (CSV)}
+        \PY{n}{output\PYZus{}data\PYZus{}file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{output\PYZus{}data/cities.csv}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{c+c1}{\PYZsh{} Range of latitudes and longitudes}
+        \PY{n}{lat\PYZus{}range} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{90}\PY{p}{,} \PY{l+m+mi}{90}\PY{p}{)}
+        \PY{n}{lng\PYZus{}range} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{180}\PY{p}{,} \PY{l+m+mi}{180}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Generate Cities List}\label{generate-cities-list}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} List for holding lat\PYZus{}lngs and cities}
+        \PY{n}{lat\PYZus{}lngs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{cities} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Create a set of random lat and lng combinations}
+        \PY{n}{lats} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{low}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{90.000}\PY{p}{,} \PY{n}{high}\PY{o}{=}\PY{l+m+mf}{90.000}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{1500}\PY{p}{)}
+        \PY{n}{lngs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{low}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{180.000}\PY{p}{,} \PY{n}{high}\PY{o}{=}\PY{l+m+mf}{180.000}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{1500}\PY{p}{)}
+        \PY{n}{lat\PYZus{}lngs} \PY{o}{=} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{lats}\PY{p}{,} \PY{n}{lngs}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Identify nearest city for each lat, lng combination}
+        \PY{k}{for} \PY{n}{lat\PYZus{}lng} \PY{o+ow}{in} \PY{n}{lat\PYZus{}lngs}\PY{p}{:}
+            \PY{n}{city} \PY{o}{=} \PY{n}{citipy}\PY{o}{.}\PY{n}{nearest\PYZus{}city}\PY{p}{(}\PY{n}{lat\PYZus{}lng}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{lat\PYZus{}lng}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{city\PYZus{}name}
+            
+            \PY{c+c1}{\PYZsh{} If the city is unique, then add it to a our cities list}
+            \PY{k}{if} \PY{n}{city} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{cities}\PY{p}{:}
+                \PY{n}{cities}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{city}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Print the city count to confirm sufficient count}
+        \PY{n+nb}{len}\PY{p}{(}\PY{n}{cities}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} 595
+\end{Verbatim}
+            
+    \subsection{Perform API Calls}\label{perform-api-calls}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} OpenWeatherMap API Key}
+        \PY{n}{api\PYZus{}key} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{225b370723956e3ae4784f52e2800bff}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{c+c1}{\PYZsh{} Starting URL for Weather Map API Call}
+        \PY{n}{url} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{http://api.openweathermap.org/data/2.5/weather?}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{units} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{imperial}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{c+c1}{\PYZsh{} Build partial query URL}
+        \PY{n}{query\PYZus{}url} \PY{o}{=} \PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}url\PYZcb{}}\PY{l+s+s2}{appid=}\PY{l+s+si}{\PYZob{}api\PYZus{}key\PYZcb{}}\PY{l+s+s2}{\PYZam{}units=}\PY{l+s+si}{\PYZob{}units\PYZcb{}}\PY{l+s+s2}{\PYZam{}q=}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} List of city data}
+        \PY{n}{city\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{city\PYZus{}info} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Print on log }
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Begin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.........................}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} Loop through the list of cities and perform a request for data on each}
+        \PY{k}{for} \PY{n}{city} \PY{o+ow}{in} \PY{n}{cities}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Processing record for the city: }\PY{l+s+si}{\PYZob{}city\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}   
+            \PY{n}{response} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{query\PYZus{}url} \PY{o}{+} \PY{n}{city}\PY{p}{)}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}
+            \PY{n}{searchCityID} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{if} \PY{n}{response}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{     Record found for city: }\PY{l+s+si}{\PYZob{}city\PYZcb{}}\PY{l+s+s2}{    city id: }\PY{l+s+si}{\PYZob{}searchCityID\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{city\PYZus{}info}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{response}\PY{p}{)}
+                \PY{n}{city\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{city}\PY{p}{)}
+                
+            \PY{k}{else}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{     No weather record found for city: }\PY{l+s+si}{\PYZob{}city\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  
+        \PY{c+c1}{\PYZsh{} Indicate that Data Loading is complete }
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Complete}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Begin
+{\ldots}
+Processing record for the city: aquiraz
+     Record found for city: aquiraz    city id: 3407407
+Processing record for the city: broken hill
+     Record found for city: broken hill    city id: 2173911
+Processing record for the city: alandi
+     Record found for city: alandi    city id: 1279066
+Processing record for the city: zhigansk
+     Record found for city: zhigansk    city id: 2012530
+Processing record for the city: araouane
+     Record found for city: araouane    city id: 2460954
+Processing record for the city: acapulco
+     Record found for city: acapulco    city id: 3533462
+Processing record for the city: new norfolk
+     Record found for city: new norfolk    city id: 2155415
+Processing record for the city: najran
+     Record found for city: najran    city id: 103630
+Processing record for the city: jamestown
+     Record found for city: jamestown    city id: 2069194
+Processing record for the city: bargal
+     No weather record found for city: bargal
+Processing record for the city: suoyarvi
+     Record found for city: suoyarvi    city id: 486186
+Processing record for the city: kaitangata
+     Record found for city: kaitangata    city id: 2208248
+Processing record for the city: castro
+     Record found for city: castro    city id: 3896218
+Processing record for the city: kavaratti
+     Record found for city: kavaratti    city id: 1267390
+Processing record for the city: ushuaia
+     Record found for city: ushuaia    city id: 3833367
+Processing record for the city: kiruna
+     Record found for city: kiruna    city id: 605155
+Processing record for the city: cape town
+     Record found for city: cape town    city id: 3369157
+Processing record for the city: tumannyy
+     No weather record found for city: tumannyy
+Processing record for the city: narsaq
+     Record found for city: narsaq    city id: 3421719
+Processing record for the city: harper
+     Record found for city: harper    city id: 4696310
+Processing record for the city: kendari
+     Record found for city: kendari    city id: 1640344
+Processing record for the city: port alfred
+     Record found for city: port alfred    city id: 964432
+Processing record for the city: bambous virieux
+     Record found for city: bambous virieux    city id: 1106677
+Processing record for the city: saint george
+     Record found for city: saint george    city id: 262462
+Processing record for the city: hobart
+     Record found for city: hobart    city id: 2163355
+Processing record for the city: butaritari
+     Record found for city: butaritari    city id: 2110227
+Processing record for the city: indianola
+     Record found for city: indianola    city id: 5697383
+Processing record for the city: sadowara
+     No weather record found for city: sadowara
+Processing record for the city: avarua
+     Record found for city: avarua    city id: 4035715
+Processing record for the city: ancud
+     Record found for city: ancud    city id: 3899695
+Processing record for the city: taolanaro
+     No weather record found for city: taolanaro
+Processing record for the city: rikitea
+     Record found for city: rikitea    city id: 4030556
+Processing record for the city: cairns
+     Record found for city: cairns    city id: 2172797
+Processing record for the city: port blair
+     Record found for city: port blair    city id: 1259385
+Processing record for the city: kauhajoki
+     Record found for city: kauhajoki    city id: 653627
+Processing record for the city: hermanus
+     Record found for city: hermanus    city id: 3366880
+Processing record for the city: hilo
+     Record found for city: hilo    city id: 5855927
+Processing record for the city: palabuhanratu
+     No weather record found for city: palabuhanratu
+Processing record for the city: santa isabel
+     Record found for city: santa isabel    city id: 3668716
+Processing record for the city: yellowknife
+     Record found for city: yellowknife    city id: 6185377
+Processing record for the city: mataura
+     Record found for city: mataura    city id: 6201424
+Processing record for the city: barrow
+     Record found for city: barrow    city id: 3833859
+Processing record for the city: waipawa
+     Record found for city: waipawa    city id: 2185329
+Processing record for the city: kirundo
+     Record found for city: kirundo    city id: 432456
+Processing record for the city: tiksi
+     Record found for city: tiksi    city id: 2015306
+Processing record for the city: norfolk
+     Record found for city: norfolk    city id: 4776222
+Processing record for the city: matara
+     Record found for city: matara    city id: 3948642
+Processing record for the city: tasiilaq
+     Record found for city: tasiilaq    city id: 3424607
+Processing record for the city: clyde river
+     Record found for city: clyde river    city id: 5924351
+Processing record for the city: touros
+     Record found for city: touros    city id: 3386213
+Processing record for the city: tecoanapa
+     Record found for city: tecoanapa    city id: 3532499
+Processing record for the city: nizhneyansk
+     No weather record found for city: nizhneyansk
+Processing record for the city: dingle
+     Record found for city: dingle    city id: 1714733
+Processing record for the city: ribeira grande
+     Record found for city: ribeira grande    city id: 3372707
+Processing record for the city: bluff
+     Record found for city: bluff    city id: 2175403
+Processing record for the city: bethel
+     Record found for city: bethel    city id: 5880568
+Processing record for the city: hithadhoo
+     Record found for city: hithadhoo    city id: 1282256
+Processing record for the city: nikolskoye
+     Record found for city: nikolskoye    city id: 546105
+Processing record for the city: khatanga
+     Record found for city: khatanga    city id: 2022572
+Processing record for the city: sao joao da barra
+     Record found for city: sao joao da barra    city id: 3448903
+Processing record for the city: torbay
+     Record found for city: torbay    city id: 6167817
+Processing record for the city: moyo
+     No weather record found for city: moyo
+Processing record for the city: mergui
+     No weather record found for city: mergui
+Processing record for the city: mahebourg
+     Record found for city: mahebourg    city id: 934322
+Processing record for the city: albany
+     Record found for city: albany    city id: 5106834
+Processing record for the city: comodoro rivadavia
+     Record found for city: comodoro rivadavia    city id: 3860443
+Processing record for the city: barentsburg
+     No weather record found for city: barentsburg
+Processing record for the city: georgetown
+     Record found for city: georgetown    city id: 3378644
+Processing record for the city: liuzhou
+     Record found for city: liuzhou    city id: 1803300
+Processing record for the city: tuatapere
+     Record found for city: tuatapere    city id: 2180815
+Processing record for the city: zheleznodorozhnyy
+     Record found for city: zheleznodorozhnyy    city id: 463355
+Processing record for the city: fare
+     Record found for city: fare    city id: 4034496
+Processing record for the city: kotdwara
+     Record found for city: kotdwara    city id: 1266014
+Processing record for the city: fairbanks
+     Record found for city: fairbanks    city id: 5861897
+Processing record for the city: ijaki
+     No weather record found for city: ijaki
+Processing record for the city: haines junction
+     Record found for city: haines junction    city id: 5969025
+Processing record for the city: marv dasht
+     No weather record found for city: marv dasht
+Processing record for the city: cap malheureux
+     Record found for city: cap malheureux    city id: 934649
+Processing record for the city: mar del plata
+     Record found for city: mar del plata    city id: 3863379
+Processing record for the city: busselton
+     Record found for city: busselton    city id: 2075265
+Processing record for the city: mys shmidta
+     No weather record found for city: mys shmidta
+Processing record for the city: saskylakh
+     Record found for city: saskylakh    city id: 2017155
+Processing record for the city: kodiak
+     Record found for city: kodiak    city id: 4407665
+Processing record for the city: hamilton
+     Record found for city: hamilton    city id: 5969785
+Processing record for the city: pevek
+     Record found for city: pevek    city id: 2122090
+Processing record for the city: naze
+     Record found for city: naze    city id: 2337542
+Processing record for the city: henties bay
+     Record found for city: henties bay    city id: 3356832
+Processing record for the city: komsomolskiy
+     Record found for city: komsomolskiy    city id: 1486910
+Processing record for the city: grand river south east
+     No weather record found for city: grand river south east
+Processing record for the city: verkh-usugli
+     Record found for city: verkh-usugli    city id: 2013459
+Processing record for the city: vaini
+     Record found for city: vaini    city id: 1273574
+Processing record for the city: nanortalik
+     Record found for city: nanortalik    city id: 3421765
+Processing record for the city: punta arenas
+     Record found for city: punta arenas    city id: 3874787
+Processing record for the city: morant bay
+     Record found for city: morant bay    city id: 3489440
+Processing record for the city: ust-nera
+     Record found for city: ust-nera    city id: 2120048
+Processing record for the city: tilichiki
+     Record found for city: tilichiki    city id: 2120591
+Processing record for the city: kathu
+     Record found for city: kathu    city id: 991664
+Processing record for the city: shakawe
+     Record found for city: shakawe    city id: 933077
+Processing record for the city: sibolga
+     Record found for city: sibolga    city id: 1213855
+Processing record for the city: lumeje
+     Record found for city: lumeje    city id: 876123
+Processing record for the city: ponta do sol
+     Record found for city: ponta do sol    city id: 3453439
+Processing record for the city: amderma
+     No weather record found for city: amderma
+Processing record for the city: bakchar
+     Record found for city: bakchar    city id: 1511057
+Processing record for the city: saint-philippe
+     Record found for city: saint-philippe    city id: 6138908
+Processing record for the city: ixtapa
+     Record found for city: ixtapa    city id: 4004293
+Processing record for the city: lamu
+     Record found for city: lamu    city id: 1623890
+Processing record for the city: linchuan
+     No weather record found for city: linchuan
+Processing record for the city: perene
+     Record found for city: perene    city id: 3932502
+Processing record for the city: timaru
+     Record found for city: timaru    city id: 2181133
+Processing record for the city: walvis bay
+     Record found for city: walvis bay    city id: 3359638
+Processing record for the city: husavik
+     Record found for city: husavik    city id: 5961417
+Processing record for the city: sola
+     Record found for city: sola    city id: 3137942
+Processing record for the city: lebu
+     Record found for city: lebu    city id: 344979
+Processing record for the city: sentyabrskiy
+     No weather record found for city: sentyabrskiy
+Processing record for the city: kysyl-syr
+     Record found for city: kysyl-syr    city id: 2021017
+Processing record for the city: havre-saint-pierre
+     Record found for city: havre-saint-pierre    city id: 5972291
+Processing record for the city: kapaa
+     Record found for city: kapaa    city id: 5848280
+Processing record for the city: nome
+     Record found for city: nome    city id: 4732862
+Processing record for the city: saleaula
+     No weather record found for city: saleaula
+Processing record for the city: lhokseumawe
+     Record found for city: lhokseumawe    city id: 1214658
+Processing record for the city: tautira
+     Record found for city: tautira    city id: 4033557
+Processing record for the city: lubumbashi
+     Record found for city: lubumbashi    city id: 922704
+Processing record for the city: slavgorodskoye
+     No weather record found for city: slavgorodskoye
+Processing record for the city: kirakira
+     Record found for city: kirakira    city id: 2178753
+Processing record for the city: provideniya
+     Record found for city: provideniya    city id: 4031574
+Processing record for the city: leningradskiy
+     Record found for city: leningradskiy    city id: 2123814
+Processing record for the city: luba
+     Record found for city: luba    city id: 1705460
+Processing record for the city: bubaque
+     Record found for city: bubaque    city id: 2374583
+Processing record for the city: iqaluit
+     Record found for city: iqaluit    city id: 5983720
+Processing record for the city: jacareacanga
+     Record found for city: jacareacanga    city id: 3397763
+Processing record for the city: saulkrasti
+     Record found for city: saulkrasti    city id: 455812
+Processing record for the city: vardo
+     Record found for city: vardo    city id: 4372777
+Processing record for the city: thompson
+     Record found for city: thompson    city id: 6165406
+Processing record for the city: cheremukhovo
+     Record found for city: cheremukhovo    city id: 466423
+Processing record for the city: werda
+     Record found for city: werda    city id: 2810970
+Processing record for the city: letterkenny
+     Record found for city: letterkenny    city id: 2962961
+Processing record for the city: magnitka
+     Record found for city: magnitka    city id: 532292
+Processing record for the city: aracuai
+     Record found for city: aracuai    city id: 3471846
+Processing record for the city: denpasar
+     Record found for city: denpasar    city id: 1645528
+Processing record for the city: gat
+     Record found for city: gat    city id: 2249901
+Processing record for the city: victoria
+     Record found for city: victoria    city id: 1733782
+Processing record for the city: vanimo
+     Record found for city: vanimo    city id: 2084442
+Processing record for the city: tessalit
+     Record found for city: tessalit    city id: 2449893
+Processing record for the city: strezhevoy
+     Record found for city: strezhevoy    city id: 1490796
+Processing record for the city: kavieng
+     Record found for city: kavieng    city id: 2094342
+Processing record for the city: fort nelson
+     Record found for city: fort nelson    city id: 5955902
+Processing record for the city: khonuu
+     No weather record found for city: khonuu
+Processing record for the city: puerto ayora
+     Record found for city: puerto ayora    city id: 3652764
+Processing record for the city: beaupre
+     Record found for city: beaupre    city id: 6325479
+Processing record for the city: saldanha
+     Record found for city: saldanha    city id: 2737599
+Processing record for the city: mollendo
+     Record found for city: mollendo    city id: 3934707
+Processing record for the city: illoqqortoormiut
+     No weather record found for city: illoqqortoormiut
+Processing record for the city: xixiang
+     Record found for city: xixiang    city id: 6942880
+Processing record for the city: souillac
+     Record found for city: souillac    city id: 3026644
+Processing record for the city: bonavista
+     Record found for city: bonavista    city id: 5905393
+Processing record for the city: belushya guba
+     No weather record found for city: belushya guba
+Processing record for the city: college
+     Record found for city: college    city id: 5859699
+Processing record for the city: astaneh-ye ashrafiyeh
+     Record found for city: astaneh-ye ashrafiyeh    city id: 142679
+Processing record for the city: mahajanga
+     Record found for city: mahajanga    city id: 1062663
+Processing record for the city: beohari
+     Record found for city: beohari    city id: 1276455
+Processing record for the city: pitimbu
+     Record found for city: pitimbu    city id: 3391889
+Processing record for the city: sorong
+     Record found for city: sorong    city id: 1626542
+Processing record for the city: esperance
+     Record found for city: esperance    city id: 3573739
+Processing record for the city: cidreira
+     Record found for city: cidreira    city id: 3466165
+Processing record for the city: biak
+     Record found for city: biak    city id: 1637001
+Processing record for the city: qaqortoq
+     Record found for city: qaqortoq    city id: 3420846
+Processing record for the city: severnoye
+     Record found for city: severnoye    city id: 496381
+Processing record for the city: kabanjahe
+     Record found for city: kabanjahe    city id: 1214965
+Processing record for the city: portland
+     Record found for city: portland    city id: 5746545
+Processing record for the city: herat
+     Record found for city: herat    city id: 1140026
+Processing record for the city: upernavik
+     Record found for city: upernavik    city id: 3418910
+Processing record for the city: lavrentiya
+     Record found for city: lavrentiya    city id: 4031637
+Processing record for the city: kashi
+     No weather record found for city: kashi
+Processing record for the city: olafsvik
+     No weather record found for city: olafsvik
+Processing record for the city: east london
+     Record found for city: east london    city id: 1006984
+Processing record for the city: padang
+     Record found for city: padang    city id: 1633419
+Processing record for the city: lata
+     Record found for city: lata    city id: 1253628
+Processing record for the city: isangel
+     Record found for city: isangel    city id: 2136825
+Processing record for the city: ribas do rio pardo
+     Record found for city: ribas do rio pardo    city id: 3451399
+Processing record for the city: ahipara
+     Record found for city: ahipara    city id: 2194098
+Processing record for the city: luderitz
+     Record found for city: luderitz    city id: 3355672
+Processing record for the city: nam tha
+     No weather record found for city: nam tha
+Processing record for the city: port elizabeth
+     Record found for city: port elizabeth    city id: 4501427
+Processing record for the city: taltal
+     Record found for city: taltal    city id: 3870243
+Processing record for the city: urumqi
+     No weather record found for city: urumqi
+Processing record for the city: rocha
+     Record found for city: rocha    city id: 3440777
+Processing record for the city: porto seguro
+     Record found for city: porto seguro    city id: 3452640
+Processing record for the city: tuktoyaktuk
+     Record found for city: tuktoyaktuk    city id: 6170031
+Processing record for the city: camacha
+     Record found for city: camacha    city id: 2270385
+Processing record for the city: noumea
+     Record found for city: noumea    city id: 2139521
+Processing record for the city: mandalgovi
+     Record found for city: mandalgovi    city id: 2030065
+Processing record for the city: myingyan
+     Record found for city: myingyan    city id: 1307835
+Processing record for the city: hambantota
+     Record found for city: hambantota    city id: 1244926
+Processing record for the city: plaeng yao
+     Record found for city: plaeng yao    city id: 1607398
+Processing record for the city: cockburn town
+     Record found for city: cockburn town    city id: 3576994
+Processing record for the city: lompoc
+     Record found for city: lompoc    city id: 5367788
+Processing record for the city: broome
+     Record found for city: broome    city id: 2656067
+Processing record for the city: saint-joseph
+     Record found for city: saint-joseph    city id: 3037456
+Processing record for the city: port macquarie
+     Record found for city: port macquarie    city id: 2152659
+Processing record for the city: mareeba
+     Record found for city: mareeba    city id: 2158767
+Processing record for the city: makakilo city
+     Record found for city: makakilo city    city id: 5850554
+Processing record for the city: te anau
+     Record found for city: te anau    city id: 2181625
+Processing record for the city: acari
+     Record found for city: acari    city id: 3390864
+Processing record for the city: bredasdorp
+     Record found for city: bredasdorp    city id: 1015776
+Processing record for the city: tsihombe
+     No weather record found for city: tsihombe
+Processing record for the city: hay river
+     Record found for city: hay river    city id: 5972762
+Processing record for the city: tondano
+     Record found for city: tondano    city id: 1623424
+Processing record for the city: mizdah
+     Record found for city: mizdah    city id: 2214827
+Processing record for the city: caravelas
+     Record found for city: caravelas    city id: 3466980
+Processing record for the city: bealanana
+     Record found for city: bealanana    city id: 1068670
+Processing record for the city: chokurdakh
+     Record found for city: chokurdakh    city id: 2126123
+Processing record for the city: doctor pedro p. pena
+     No weather record found for city: doctor pedro p. pena
+Processing record for the city: ust-kulom
+     Record found for city: ust-kulom    city id: 478050
+Processing record for the city: ponnani
+     Record found for city: ponnani    city id: 1259411
+Processing record for the city: dikson
+     Record found for city: dikson    city id: 1507390
+Processing record for the city: visnes
+     Record found for city: visnes    city id: 3131500
+Processing record for the city: durant
+     Record found for city: durant    city id: 4535414
+Processing record for the city: saryozek
+     Record found for city: saryozek    city id: 1519580
+Processing record for the city: ponta delgada
+     Record found for city: ponta delgada    city id: 3372783
+Processing record for the city: pontes e lacerda
+     Record found for city: pontes e lacerda    city id: 3453060
+Processing record for the city: pemba
+     Record found for city: pemba    city id: 1028918
+Processing record for the city: xichang
+     Record found for city: xichang    city id: 1789647
+Processing record for the city: hasaki
+     Record found for city: hasaki    city id: 2112802
+Processing record for the city: sapao
+     No weather record found for city: sapao
+Processing record for the city: longyearbyen
+     Record found for city: longyearbyen    city id: 2729907
+Processing record for the city: buenos aires
+     Record found for city: buenos aires    city id: 3435910
+Processing record for the city: cherskiy
+     Record found for city: cherskiy    city id: 2126199
+Processing record for the city: praia
+     Record found for city: praia    city id: 3460954
+Processing record for the city: warragul
+     Record found for city: warragul    city id: 2144604
+Processing record for the city: conceicao do araguaia
+     Record found for city: conceicao do araguaia    city id: 3401845
+Processing record for the city: anadyr
+     Record found for city: anadyr    city id: 2127202
+Processing record for the city: atocha
+     Record found for city: atocha    city id: 3660689
+Processing record for the city: grindavik
+     Record found for city: grindavik    city id: 3416888
+Processing record for the city: goderich
+     Record found for city: goderich    city id: 5962442
+Processing record for the city: hunza
+     No weather record found for city: hunza
+Processing record for the city: arraial do cabo
+     Record found for city: arraial do cabo    city id: 3471451
+Processing record for the city: shagonar
+     Record found for city: shagonar    city id: 1492499
+Processing record for the city: medak
+     Record found for city: medak    city id: 1263230
+Processing record for the city: marawi
+     Record found for city: marawi    city id: 1701054
+Processing record for the city: korla
+     No weather record found for city: korla
+Processing record for the city: bagaha
+     Record found for city: bagaha    city id: 1277939
+Processing record for the city: belen
+     Record found for city: belen    city id: 321572
+Processing record for the city: poplar bluff
+     Record found for city: poplar bluff    city id: 4404233
+Processing record for the city: middlebury
+     Record found for city: middlebury    city id: 5238499
+Processing record for the city: soyo
+     Record found for city: soyo    city id: 2236967
+Processing record for the city: kilindoni
+     Record found for city: kilindoni    city id: 157429
+Processing record for the city: willowmore
+     Record found for city: willowmore    city id: 939676
+Processing record for the city: katsuura
+     Record found for city: katsuura    city id: 1865309
+Processing record for the city: atuona
+     Record found for city: atuona    city id: 4020109
+Processing record for the city: vila velha
+     Record found for city: vila velha    city id: 6320062
+Processing record for the city: buraydah
+     Record found for city: buraydah    city id: 107304
+Processing record for the city: norman wells
+     Record found for city: norman wells    city id: 6089245
+Processing record for the city: zonguldak
+     Record found for city: zonguldak    city id: 737021
+Processing record for the city: batticaloa
+     Record found for city: batticaloa    city id: 1250161
+Processing record for the city: rocky mountain house
+     Record found for city: rocky mountain house    city id: 6126749
+Processing record for the city: zuwarah
+     Record found for city: zuwarah    city id: 2208425
+Processing record for the city: kalmunai
+     Record found for city: kalmunai    city id: 1242110
+Processing record for the city: nemuro
+     Record found for city: nemuro    city id: 2128975
+Processing record for the city: falam
+     Record found for city: falam    city id: 1326105
+Processing record for the city: constitucion
+     Record found for city: constitucion    city id: 4011743
+Processing record for the city: hammerfest
+     Record found for city: hammerfest    city id: 779683
+Processing record for the city: monticello
+     Record found for city: monticello    city id: 5038045
+Processing record for the city: zhangjiakou
+     Record found for city: zhangjiakou    city id: 2033196
+Processing record for the city: general elizardo aquino
+     Record found for city: general elizardo aquino    city id: 3437342
+Processing record for the city: lianzhou
+     Record found for city: lianzhou    city id: 1803841
+Processing record for the city: araguaina
+     Record found for city: araguaina    city id: 3407357
+Processing record for the city: zykovo
+     Record found for city: zykovo    city id: 480484
+Processing record for the city: tezu
+     Record found for city: tezu    city id: 1254709
+Processing record for the city: marcona
+     No weather record found for city: marcona
+Processing record for the city: sao jose da coroa grande
+     Record found for city: sao jose da coroa grande    city id: 3388456
+Processing record for the city: suntar
+     Record found for city: suntar    city id: 2015913
+Processing record for the city: feicheng
+     Record found for city: feicheng    city id: 1789176
+Processing record for the city: viedma
+     Record found for city: viedma    city id: 3832899
+Processing record for the city: sahrak
+     No weather record found for city: sahrak
+Processing record for the city: adoni
+     Record found for city: adoni    city id: 1279335
+Processing record for the city: bonthe
+     Record found for city: bonthe    city id: 2409914
+Processing record for the city: aklavik
+     Record found for city: aklavik    city id: 5882953
+Processing record for the city: ruatoria
+     No weather record found for city: ruatoria
+Processing record for the city: leh
+     Record found for city: leh    city id: 1264976
+Processing record for the city: maragogi
+     Record found for city: maragogi    city id: 3395458
+Processing record for the city: orebro
+     Record found for city: orebro    city id: 2686657
+Processing record for the city: tiznit
+     Record found for city: tiznit    city id: 2527089
+Processing record for the city: tucumcari
+     Record found for city: tucumcari    city id: 5495360
+Processing record for the city: abu samrah
+     Record found for city: abu samrah    city id: 172515
+Processing record for the city: qaanaaq
+     Record found for city: qaanaaq    city id: 3831208
+Processing record for the city: cabo san lucas
+     Record found for city: cabo san lucas    city id: 3985710
+Processing record for the city: carnarvon
+     Record found for city: carnarvon    city id: 1014034
+Processing record for the city: krasnoborsk
+     Record found for city: krasnoborsk    city id: 542423
+Processing record for the city: spornoye
+     Record found for city: spornoye    city id: 578283
+Processing record for the city: zhezkazgan
+     Record found for city: zhezkazgan    city id: 1516589
+Processing record for the city: agnibilekrou
+     Record found for city: agnibilekrou    city id: 2293260
+Processing record for the city: riacho de santana
+     Record found for city: riacho de santana    city id: 3451448
+Processing record for the city: awjilah
+     Record found for city: awjilah    city id: 88533
+Processing record for the city: pahrump
+     Record found for city: pahrump    city id: 5509851
+Processing record for the city: salinopolis
+     Record found for city: salinopolis    city id: 3389822
+Processing record for the city: shumikhinskiy
+     Record found for city: shumikhinskiy    city id: 493452
+Processing record for the city: prince rupert
+     Record found for city: prince rupert    city id: 6113406
+Processing record for the city: airai
+     Record found for city: airai    city id: 1651810
+Processing record for the city: talaya
+     Record found for city: talaya    city id: 1485724
+Processing record for the city: boddam
+     Record found for city: boddam    city id: 2655288
+Processing record for the city: sulangan
+     Record found for city: sulangan    city id: 1685422
+Processing record for the city: valparaiso
+     Record found for city: valparaiso    city id: 4927537
+Processing record for the city: faanui
+     Record found for city: faanui    city id: 4034551
+Processing record for the city: beringovskiy
+     Record found for city: beringovskiy    city id: 2126710
+Processing record for the city: nishihara
+     Record found for city: nishihara    city id: 1850144
+Processing record for the city: evensk
+     Record found for city: evensk    city id: 2125693
+Processing record for the city: ostrovnoy
+     Record found for city: ostrovnoy    city id: 556268
+Processing record for the city: bytow
+     Record found for city: bytow    city id: 3101943
+Processing record for the city: san jose de guanipa
+     Record found for city: san jose de guanipa    city id: 3628142
+Processing record for the city: chicama
+     Record found for city: chicama    city id: 3698359
+Processing record for the city: solnechnyy
+     Record found for city: solnechnyy    city id: 2016307
+Processing record for the city: malakal
+     No weather record found for city: malakal
+Processing record for the city: klyuchi
+     Record found for city: klyuchi    city id: 1503153
+Processing record for the city: geraldton
+     Record found for city: geraldton    city id: 5960603
+Processing record for the city: mount gambier
+     Record found for city: mount gambier    city id: 2156643
+Processing record for the city: louisbourg
+     No weather record found for city: louisbourg
+Processing record for the city: kushiro
+     Record found for city: kushiro    city id: 2129072
+Processing record for the city: kamenskoye
+     No weather record found for city: kamenskoye
+Processing record for the city: fredericksburg
+     Record found for city: fredericksburg    city id: 4692279
+Processing record for the city: vaitupu
+     No weather record found for city: vaitupu
+Processing record for the city: faya
+     Record found for city: faya    city id: 110690
+Processing record for the city: pangoa
+     Record found for city: pangoa    city id: 3933104
+Processing record for the city: baiyin
+     Record found for city: baiyin    city id: 1817240
+Processing record for the city: lolua
+     No weather record found for city: lolua
+Processing record for the city: vila franca do campo
+     Record found for city: vila franca do campo    city id: 3372472
+Processing record for the city: klaksvik
+     Record found for city: klaksvik    city id: 2618795
+Processing record for the city: nouadhibou
+     Record found for city: nouadhibou    city id: 2377457
+Processing record for the city: buala
+     Record found for city: buala    city id: 2109528
+Processing record for the city: agadir
+     Record found for city: agadir    city id: 2561668
+Processing record for the city: sao filipe
+     Record found for city: sao filipe    city id: 3374210
+Processing record for the city: torbat-e jam
+     Record found for city: torbat-e jam    city id: 1159362
+Processing record for the city: necochea
+     Record found for city: necochea    city id: 3430443
+Processing record for the city: magistralnyy
+     Record found for city: magistralnyy    city id: 2020584
+Processing record for the city: umzimvubu
+     No weather record found for city: umzimvubu
+Processing record for the city: kommunar
+     Record found for city: kommunar    city id: 545788
+Processing record for the city: hirara
+     Record found for city: hirara    city id: 1862505
+Processing record for the city: asau
+     No weather record found for city: asau
+Processing record for the city: lorengau
+     Record found for city: lorengau    city id: 2092164
+Processing record for the city: goundam
+     Record found for city: goundam    city id: 2456917
+Processing record for the city: puerto madryn
+     Record found for city: puerto madryn    city id: 3840092
+Processing record for the city: port-gentil
+     Record found for city: port-gentil    city id: 2396518
+Processing record for the city: eureka
+     Record found for city: eureka    city id: 5563397
+Processing record for the city: mehamn
+     Record found for city: mehamn    city id: 778707
+Processing record for the city: baijiantan
+     Record found for city: baijiantan    city id: 1529626
+Processing record for the city: sinnamary
+     Record found for city: sinnamary    city id: 3380290
+Processing record for the city: zatreni
+     Record found for city: zatreni    city id: 662274
+Processing record for the city: hobyo
+     Record found for city: hobyo    city id: 57000
+Processing record for the city: amberley
+     Record found for city: amberley    city id: 2193968
+Processing record for the city: abancay
+     Record found for city: abancay    city id: 3948642
+Processing record for the city: whitehorse
+     Record found for city: whitehorse    city id: 6180550
+Processing record for the city: onguday
+     Record found for city: onguday    city id: 1496130
+Processing record for the city: bokoro
+     No weather record found for city: bokoro
+Processing record for the city: mugumu
+     Record found for city: mugumu    city id: 152663
+Processing record for the city: vaitape
+     Record found for city: vaitape    city id: 4033077
+Processing record for the city: bandarbeyla
+     Record found for city: bandarbeyla    city id: 64814
+Processing record for the city: kalabo
+     Record found for city: kalabo    city id: 915471
+Processing record for the city: san patricio
+     Record found for city: san patricio    city id: 3437029
+Processing record for the city: archidona
+     Record found for city: archidona    city id: 3660573
+Processing record for the city: vestmannaeyjar
+     Record found for city: vestmannaeyjar    city id: 3412093
+Processing record for the city: namibe
+     Record found for city: namibe    city id: 3347019
+Processing record for the city: ngara
+     Record found for city: ngara    city id: 151711
+Processing record for the city: aasiaat
+     Record found for city: aasiaat    city id: 3424901
+Processing record for the city: iztapa
+     Record found for city: iztapa    city id: 3595255
+Processing record for the city: jalu
+     Record found for city: jalu    city id: 86049
+Processing record for the city: auki
+     Record found for city: auki    city id: 2339937
+Processing record for the city: obeliai
+     Record found for city: obeliai    city id: 595213
+Processing record for the city: iskateley
+     Record found for city: iskateley    city id: 866062
+Processing record for the city: moranbah
+     Record found for city: moranbah    city id: 6533368
+Processing record for the city: tamandare
+     Record found for city: tamandare    city id: 3661980
+Processing record for the city: kishi
+     Record found for city: kishi    city id: 2334327
+Processing record for the city: churapcha
+     Record found for city: churapcha    city id: 2025241
+Processing record for the city: talnakh
+     Record found for city: talnakh    city id: 1490256
+Processing record for the city: teguise
+     Record found for city: teguise    city id: 2510573
+Processing record for the city: byron bay
+     Record found for city: byron bay    city id: 2172880
+Processing record for the city: nigel
+     Record found for city: nigel    city id: 970566
+Processing record for the city: bondoukou
+     Record found for city: bondoukou    city id: 2291136
+Processing record for the city: rupert
+     Record found for city: rupert    city id: 5606000
+Processing record for the city: lethem
+     Record found for city: lethem    city id: 3379316
+Processing record for the city: mahibadhoo
+     Record found for city: mahibadhoo    city id: 1337605
+Processing record for the city: miranda de ebro
+     Record found for city: miranda de ebro    city id: 3116689
+Processing record for the city: emba
+     Record found for city: emba    city id: 146639
+Processing record for the city: skvyra
+     Record found for city: skvyra    city id: 693615
+Processing record for the city: severo-kurilsk
+     Record found for city: severo-kurilsk    city id: 2121385
+Processing record for the city: shubarshi
+     Record found for city: shubarshi    city id: 608270
+Processing record for the city: pangnirtung
+     Record found for city: pangnirtung    city id: 6096551
+Processing record for the city: cayenne
+     Record found for city: cayenne    city id: 3382160
+Processing record for the city: sangar
+     Record found for city: sangar    city id: 2017215
+Processing record for the city: ongole
+     Record found for city: ongole    city id: 1261045
+Processing record for the city: nichinan
+     Record found for city: nichinan    city id: 1855476
+Processing record for the city: cabedelo
+     Record found for city: cabedelo    city id: 3404558
+Processing record for the city: kamiichi
+     Record found for city: kamiichi    city id: 1860563
+Processing record for the city: domna
+     Record found for city: domna    city id: 2024893
+Processing record for the city: magetan
+     No weather record found for city: magetan
+Processing record for the city: abu kamal
+     Record found for city: abu kamal    city id: 174448
+Processing record for the city: cheuskiny
+     No weather record found for city: cheuskiny
+Processing record for the city: svetlaya
+     Record found for city: svetlaya    city id: 2015852
+Processing record for the city: bur gabo
+     No weather record found for city: bur gabo
+Processing record for the city: camacupa
+     Record found for city: camacupa    city id: 3351014
+Processing record for the city: jahrom
+     No weather record found for city: jahrom
+Processing record for the city: takoradi
+     Record found for city: takoradi    city id: 2294915
+Processing record for the city: oussouye
+     Record found for city: oussouye    city id: 2246901
+Processing record for the city: dukat
+     Record found for city: dukat    city id: 786562
+Processing record for the city: christchurch
+     Record found for city: christchurch    city id: 2192362
+Processing record for the city: sikandra rao
+     Record found for city: sikandra rao    city id: 1256322
+Processing record for the city: seoul
+     Record found for city: seoul    city id: 1835848
+Processing record for the city: vysokogornyy
+     Record found for city: vysokogornyy    city id: 2013216
+Processing record for the city: westport
+     Record found for city: westport    city id: 2960970
+Processing record for the city: makubetsu
+     Record found for city: makubetsu    city id: 2128815
+Processing record for the city: bloomsburg
+     Record found for city: bloomsburg    city id: 5180934
+Processing record for the city: bengkulu
+     No weather record found for city: bengkulu
+Processing record for the city: canchungo
+     Record found for city: canchungo    city id: 2373951
+Processing record for the city: lundazi
+     Record found for city: lundazi    city id: 909299
+Processing record for the city: shar
+     Record found for city: shar    city id: 2347266
+Processing record for the city: samalaeulu
+     No weather record found for city: samalaeulu
+Processing record for the city: ilulissat
+     Record found for city: ilulissat    city id: 3423146
+Processing record for the city: kanniyakumari
+     Record found for city: kanniyakumari    city id: 1268008
+Processing record for the city: fortuna
+     Record found for city: fortuna    city id: 2517679
+Processing record for the city: chuy
+     Record found for city: chuy    city id: 3443061
+Processing record for the city: armacao dos buzios
+     No weather record found for city: armacao dos buzios
+Processing record for the city: manado
+     Record found for city: manado    city id: 1636544
+Processing record for the city: tucuman
+     Record found for city: tucuman    city id: 3934608
+Processing record for the city: linxia
+     Record found for city: linxia    city id: 1803331
+Processing record for the city: nizhniy chir
+     Record found for city: nizhniy chir    city id: 520783
+Processing record for the city: bilibino
+     Record found for city: bilibino    city id: 2126682
+Processing record for the city: jakhal mandi
+     No weather record found for city: jakhal mandi
+Processing record for the city: shellbrook
+     Record found for city: shellbrook    city id: 6145951
+Processing record for the city: sechura
+     Record found for city: sechura    city id: 3691954
+Processing record for the city: gumla
+     Record found for city: gumla    city id: 1270722
+Processing record for the city: ampanihy
+     Record found for city: ampanihy    city id: 1078553
+Processing record for the city: beaufort
+     Record found for city: beaufort    city id: 1733874
+Processing record for the city: mogadouro
+     Record found for city: mogadouro    city id: 2737599
+Processing record for the city: atikokan
+     Record found for city: atikokan    city id: 5888001
+Processing record for the city: san andres
+     Record found for city: san andres    city id: 1690438
+Processing record for the city: monrovia
+     Record found for city: monrovia    city id: 2274895
+Processing record for the city: banjar
+     Record found for city: banjar    city id: 1650233
+Processing record for the city: paamiut
+     Record found for city: paamiut    city id: 3421193
+Processing record for the city: bauru
+     Record found for city: bauru    city id: 3470279
+Processing record for the city: dhidhdhoo
+     Record found for city: dhidhdhoo    city id: 1337612
+Processing record for the city: half moon bay
+     Record found for city: half moon bay    city id: 5354943
+Processing record for the city: krasnoselkup
+     No weather record found for city: krasnoselkup
+Processing record for the city: ocher
+     Record found for city: ocher    city id: 516256
+Processing record for the city: kahului
+     Record found for city: kahului    city id: 5847411
+Processing record for the city: corrente
+     Record found for city: corrente    city id: 3445459
+Processing record for the city: mount isa
+     Record found for city: mount isa    city id: 2065594
+Processing record for the city: port hardy
+     Record found for city: port hardy    city id: 6111862
+Processing record for the city: amazar
+     Record found for city: amazar    city id: 2027806
+Processing record for the city: weinan
+     Record found for city: weinan    city id: 1791636
+Processing record for the city: magui
+     No weather record found for city: magui
+Processing record for the city: tambopata
+     No weather record found for city: tambopata
+Processing record for the city: ceres
+     Record found for city: ceres    city id: 3862100
+Processing record for the city: salalah
+     Record found for city: salalah    city id: 286621
+Processing record for the city: boden
+     Record found for city: boden    city id: 606531
+Processing record for the city: coahuayana
+     Record found for city: coahuayana    city id: 3981460
+Processing record for the city: freeport
+     Record found for city: freeport    city id: 3572375
+Processing record for the city: shahr-e kord
+     Record found for city: shahr-e kord    city id: 115770
+Processing record for the city: vondrozo
+     Record found for city: vondrozo    city id: 1053507
+Processing record for the city: qandala
+     Record found for city: qandala    city id: 53157
+Processing record for the city: san fernando
+     Record found for city: san fernando    city id: 3871286
+Processing record for the city: port hedland
+     Record found for city: port hedland    city id: 2063042
+Processing record for the city: dwarka
+     Record found for city: dwarka    city id: 1273294
+Processing record for the city: shenzhen
+     Record found for city: shenzhen    city id: 1795565
+Processing record for the city: srednekolymsk
+     Record found for city: srednekolymsk    city id: 2121025
+Processing record for the city: cooma
+     Record found for city: cooma    city id: 2170577
+Processing record for the city: novo aripuana
+     Record found for city: novo aripuana    city id: 3663142
+Processing record for the city: kashira
+     Record found for city: kashira    city id: 551964
+Processing record for the city: laguna
+     Record found for city: laguna    city id: 4013704
+Processing record for the city: yongan
+     Record found for city: yongan    city id: 1806687
+Processing record for the city: tateyama
+     Record found for city: tateyama    city id: 1849876
+Processing record for the city: muli
+     Record found for city: muli    city id: 1256929
+Processing record for the city: balkhash
+     Record found for city: balkhash    city id: 1525798
+Processing record for the city: dubna
+     Record found for city: dubna    city id: 564719
+Processing record for the city: samusu
+     No weather record found for city: samusu
+Processing record for the city: belomorsk
+     Record found for city: belomorsk    city id: 577922
+Processing record for the city: mildura
+     Record found for city: mildura    city id: 2157698
+Processing record for the city: varkaus
+     Record found for city: varkaus    city id: 632371
+Processing record for the city: neuquen
+     Record found for city: neuquen    city id: 3843123
+Processing record for the city: mezen
+     Record found for city: mezen    city id: 527321
+Processing record for the city: berlevag
+     Record found for city: berlevag    city id: 780687
+Processing record for the city: zhanaozen
+     Record found for city: zhanaozen    city id: 607610
+Processing record for the city: karratha
+     Record found for city: karratha    city id: 6620339
+Processing record for the city: russellville
+     Record found for city: russellville    city id: 4129397
+Processing record for the city: lagoa
+     Record found for city: lagoa    city id: 2267254
+Processing record for the city: abnub
+     Record found for city: abnub    city id: 362973
+Processing record for the city: praya
+     Record found for city: praya    city id: 1630662
+Processing record for the city: goba
+     Record found for city: goba    city id: 336350
+Processing record for the city: parangan
+     Record found for city: parangan    city id: 1694759
+Processing record for the city: victor harbor
+     Record found for city: victor harbor    city id: 2059470
+Processing record for the city: yeppoon
+     Record found for city: yeppoon    city id: 2142316
+Processing record for the city: marsa matruh
+     Record found for city: marsa matruh    city id: 352733
+Processing record for the city: eyrarbakki
+     Record found for city: eyrarbakki    city id: 3413604
+Processing record for the city: attawapiskat
+     No weather record found for city: attawapiskat
+Processing record for the city: west wendover
+     Record found for city: west wendover    city id: 5710035
+Processing record for the city: north myrtle beach
+     Record found for city: north myrtle beach    city id: 4589446
+Processing record for the city: guozhen
+     Record found for city: guozhen    city id: 1927639
+Processing record for the city: chapais
+     Record found for city: chapais    city id: 5919850
+Processing record for the city: katobu
+     Record found for city: katobu    city id: 1640972
+Processing record for the city: vagay
+     Record found for city: vagay    city id: 1487860
+Processing record for the city: carinhanha
+     Record found for city: carinhanha    city id: 3466950
+Processing record for the city: opuwo
+     Record found for city: opuwo    city id: 3354077
+Processing record for the city: rangkasbitung
+     Record found for city: rangkasbitung    city id: 1630058
+Processing record for the city: katangli
+     Record found for city: katangli    city id: 2122783
+Processing record for the city: morondava
+     Record found for city: morondava    city id: 1058381
+Processing record for the city: santa eulalia del rio
+     No weather record found for city: santa eulalia del rio
+Processing record for the city: zeya
+     Record found for city: zeya    city id: 2012593
+Processing record for the city: shelburne
+     Record found for city: shelburne    city id: 6145890
+Processing record for the city: temaraia
+     No weather record found for city: temaraia
+Processing record for the city: rincon
+     Record found for city: rincon    city id: 4218882
+Processing record for the city: mattoon
+     Record found for city: mattoon    city id: 4244099
+Processing record for the city: bilma
+     Record found for city: bilma    city id: 2446796
+Processing record for the city: andenes
+     No weather record found for city: andenes
+Processing record for the city: lazaro cardenas
+     Record found for city: lazaro cardenas    city id: 3996234
+Processing record for the city: kieta
+     Record found for city: kieta    city id: 2094027
+Processing record for the city: zhongshu
+     Record found for city: zhongshu    city id: 1784310
+Processing record for the city: lesogorsk
+     Record found for city: lesogorsk    city id: 1500609
+Processing record for the city: abha
+     Record found for city: abha    city id: 110690
+Processing record for the city: carauari
+     Record found for city: carauari    city id: 3664659
+Processing record for the city: ilebo
+     Record found for city: ilebo    city id: 215976
+Processing record for the city: qibili
+     No weather record found for city: qibili
+Processing record for the city: sitka
+     Record found for city: sitka    city id: 4267710
+Processing record for the city: manhattan beach
+     Record found for city: manhattan beach    city id: 5370082
+Processing record for the city: caen
+     Record found for city: caen    city id: 3029241
+Processing record for the city: pedasi
+     Record found for city: pedasi    city id: 3703239
+Processing record for the city: falealupo
+     No weather record found for city: falealupo
+Processing record for the city: kailua
+     Record found for city: kailua    city id: 5847486
+Processing record for the city: baixa grande
+     Record found for city: baixa grande    city id: 3471094
+Processing record for the city: mecca
+     Record found for city: mecca    city id: 104515
+Processing record for the city: taburi
+     No weather record found for city: taburi
+Processing record for the city: aurangabad
+     Record found for city: aurangabad    city id: 1278149
+Processing record for the city: meadow lake
+     Record found for city: meadow lake    city id: 6071421
+Processing record for the city: mahanoro
+     Record found for city: mahanoro    city id: 1062553
+Processing record for the city: ahuimanu
+     Record found for city: ahuimanu    city id: 5856516
+Processing record for the city: cozumel
+     No weather record found for city: cozumel
+Processing record for the city: pisco
+     Record found for city: pisco    city id: 3932145
+Processing record for the city: kolpashevo
+     Record found for city: kolpashevo    city id: 1502862
+Processing record for the city: mbanza-ngungu
+     Record found for city: mbanza-ngungu    city id: 2312888
+Processing record for the city: upata
+     Record found for city: upata    city id: 3625710
+Processing record for the city: baiao
+     Record found for city: baiao    city id: 3406844
+Processing record for the city: high prairie
+     Record found for city: high prairie    city id: 5975034
+Processing record for the city: racine
+     Record found for city: racine    city id: 5268249
+Processing record for the city: mianyang
+     Record found for city: mianyang    city id: 1800627
+Processing record for the city: bathsheba
+     Record found for city: bathsheba    city id: 3374083
+Processing record for the city: saint-augustin
+     Record found for city: saint-augustin    city id: 3031582
+Processing record for the city: savannakhet
+     Record found for city: savannakhet    city id: 1653316
+Processing record for the city: abong mbang
+     Record found for city: abong mbang    city id: 2236053
+Processing record for the city: guerrero negro
+     Record found for city: guerrero negro    city id: 4021858
+Processing record for the city: wanning
+     Record found for city: wanning    city id: 3220813
+Processing record for the city: macaboboni
+     No weather record found for city: macaboboni
+Processing record for the city: powell river
+     Record found for city: powell river    city id: 6112608
+Processing record for the city: kismayo
+     No weather record found for city: kismayo
+Processing record for the city: bitung
+     Record found for city: bitung    city id: 1648636
+Processing record for the city: taoudenni
+     Record found for city: taoudenni    city id: 2450173
+Processing record for the city: sorvag
+     No weather record found for city: sorvag
+Processing record for the city: kruisfontein
+     Record found for city: kruisfontein    city id: 986717
+Processing record for the city: moose factory
+     Record found for city: moose factory    city id: 6078372
+Processing record for the city: teguldet
+     Record found for city: teguldet    city id: 1489822
+Processing record for the city: umm lajj
+     Record found for city: umm lajj    city id: 100926
+Processing record for the city: puri
+     Record found for city: puri    city id: 1635111
+Processing record for the city: altagracia de orituco
+     Record found for city: altagracia de orituco    city id: 3649408
+Processing record for the city: meyungs
+     No weather record found for city: meyungs
+Processing record for the city: manzil salim
+     Record found for city: manzil salim    city id: 2469252
+Processing record for the city: dudinka
+     Record found for city: dudinka    city id: 1507116
+Processing record for the city: ossora
+     Record found for city: ossora    city id: 2122389
+Processing record for the city: socorro
+     Record found for city: socorro    city id: 1685936
+Processing record for the city: scottsburgh
+     No weather record found for city: scottsburgh
+Processing record for the city: mariental
+     Record found for city: mariental    city id: 2873499
+Processing record for the city: da nang
+     No weather record found for city: da nang
+Processing record for the city: houma
+     Record found for city: houma    city id: 1784874
+Processing record for the city: turiacu
+     Record found for city: turiacu    city id: 3665361
+Processing record for the city: venado tuerto
+     Record found for city: venado tuerto    city id: 3833062
+Processing record for the city: gigmoto
+     Record found for city: gigmoto    city id: 1712961
+Processing record for the city: vitim
+     Record found for city: vitim    city id: 2013375
+Processing record for the city: gualaquiza
+     Record found for city: gualaquiza    city id: 3657661
+Processing record for the city: kulhudhuffushi
+     Record found for city: kulhudhuffushi    city id: 1337613
+Processing record for the city: bayan
+     Record found for city: bayan    city id: 2030079
+Processing record for the city: camargo
+     Record found for city: camargo    city id: 4013724
+Processing record for the city: kloulklubed
+     Record found for city: kloulklubed    city id: 7671223
+Processing record for the city: dibaya
+     No weather record found for city: dibaya
+Processing record for the city: the valley
+     Record found for city: the valley    city id: 3573374
+Processing record for the city: bondo
+     Record found for city: bondo    city id: 218253
+Processing record for the city: penzberg
+     Record found for city: penzberg    city id: 2854923
+Processing record for the city: aleksandrov gay
+     Record found for city: aleksandrov gay    city id: 583345
+Processing record for the city: mopti
+     Record found for city: mopti    city id: 2453348
+Processing record for the city: egvekinot
+     Record found for city: egvekinot    city id: 4031742
+Processing record for the city: kurumkan
+     Record found for city: kurumkan    city id: 2021188
+Processing record for the city: ureki
+     Record found for city: ureki    city id: 611274
+Processing record for the city: tlahualilo
+     No weather record found for city: tlahualilo
+Processing record for the city: serta
+     Record found for city: serta    city id: 3181569
+Processing record for the city: codrington
+     Record found for city: codrington    city id: 2160063
+Processing record for the city: sorland
+     Record found for city: sorland    city id: 3137469
+Processing record for the city: simplicio mendes
+     Record found for city: simplicio mendes    city id: 3387620
+Processing record for the city: bafilo
+     Record found for city: bafilo    city id: 2367656
+Processing record for the city: urfa
+     No weather record found for city: urfa
+Processing record for the city: maarianhamina
+     No weather record found for city: maarianhamina
+Processing record for the city: waddan
+     Record found for city: waddan    city id: 2209055
+Processing record for the city: pueblo nuevo
+     Record found for city: pueblo nuevo    city id: 4002745
+-----------------------------
+Complete
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{city\PYZus{}info}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 524
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Use list comprehension to gather necessary data series}
+        
+        \PY{n}{lat\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{coord}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{for} \PY{n}{data} \PY{o+ow}{in} \PY{n}{city\PYZus{}info}\PY{p}{]}
+        \PY{n}{max\PYZus{}temp} \PY{o}{=} \PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{main}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{temp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{for} \PY{n}{data} \PY{o+ow}{in} \PY{n}{city\PYZus{}info}\PY{p}{]}
+        \PY{n}{humidity} \PY{o}{=} \PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{main}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{humidity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{for} \PY{n}{data} \PY{o+ow}{in} \PY{n}{city\PYZus{}info}\PY{p}{]}
+        \PY{n}{clouds} \PY{o}{=} \PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clouds}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{for} \PY{n}{data} \PY{o+ow}{in} \PY{n}{city\PYZus{}info}\PY{p}{]}
+        \PY{n}{wind} \PY{o}{=} \PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wind}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{speed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{for} \PY{n}{data} \PY{o+ow}{in} \PY{n}{city\PYZus{}info}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Convert jsons into dataframe}
+        \PY{n}{weather\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{city\PYZus{}list}\PY{p}{,}
+                                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{lat\PYZus{}data}\PY{p}{,}
+                                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Temperature}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{max\PYZus{}temp}\PY{p}{,}
+                                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Humidity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{humidity}\PY{p}{,}
+                                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cloudiness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{clouds}\PY{p}{,}
+                                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Windspeed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{wind}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} Force column order}
+        \PY{n}{weather\PYZus{}data} \PY{o}{=} \PY{n}{weather\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Temperature}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Humidity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cloudiness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Windspeed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+        \PY{n}{weather\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}      City Name  Latitude  Temperature  Humidity  Cloudiness  Windspeed
+        0      aquiraz     -3.90        77.00        94          75       3.36
+        1  broken hill    -31.97        57.67        66           0      14.25
+        2       alandi     18.68        70.72        99          92       6.64
+        3     zhigansk     66.77        70.27        78          32       5.08
+        4     araouane     18.90        84.22        34          12      10.11
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Save weather data to csv file}
+        \PY{n}{weather\PYZus{}data}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{weatherdata.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} TEMPRATURE(F) VS. LATITUDE}
+         
+         \PY{c+c1}{\PYZsh{} Build a scatter plot for each data type}
+         
+         \PY{c+c1}{\PYZsh{} Latitude vs Max Temp}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{weather\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{weather\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Temperature}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add chart labels}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TEMPRATURE(F) VS. LATITUDE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Temperature (F) }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Save the figure}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lat\PYZus{}vs\PYZus{}MaxTemp.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Show plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} HUMIDITY(\PYZpc{}) VS. LATITUDE}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{weather\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{weather\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Humidity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add chart labels}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{HUMIDITY(}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{) VS. LATITUDE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Humidity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Save the figure}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Humidity\PYZus{}vs\PYZus{}Lat.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Show plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} CLOUDINESS(\PYZpc{}) VS. LATITUDE}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{weather\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{weather\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cloudiness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add chart labels}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CLOUDINESS(}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{) VS. LATITUDE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cloudiness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Save the figure}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cloudiness\PYZus{}vs\PYZus{}Lat.png.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Show plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} WIND SPEED (MPH) VS. LATITUDE}
+         
+         \PY{c+c1}{\PYZsh{} Latitude vs Wind Speed}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{weather\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{weather\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Windspeed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add chart labels}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{WIND SPEED (mph) VS. LATITUDE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wind Speed (mph)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Save the figure}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{WindSpeed\PYZus{}vs\PYZus{}Lat.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Show plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
